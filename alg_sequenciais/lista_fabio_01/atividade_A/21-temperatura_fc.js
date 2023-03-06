@@ -7,4 +7,4 @@ const temperatura_em_fahrenheit = Number(input('Temperatura em ºC: '))
 
 const temperatura_celcius = (5 * temperatura_em_fahrenheit - 160) / 9
 
-console.log(`Temperatura em ºC: ${temperatura_celcius}`)
+console.log(`Temperatura em ºC: ${temperatura_celcius.toFixed(2)}`)
