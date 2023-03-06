@@ -25,4 +25,4 @@ const y = ((val_a * f) - (c * val_d)) / ((val_a * e) - (val_b * val_d))
 const c = (a * x) + (b * y)
 const f = (a * x) + (b * y)
 
-console.log(`Valor de X: ${x}\nValor de Y: ${y}\nValor de C: ${y}\nValor de F: ${y}`)
+console.log(`Valor de X: ${x}\nValor de Y: ${y}\nValor de C: ${c}\nValor de F: ${f}`)
