@@ -22,7 +22,7 @@ const val_f  = Number(input('F: '))
 const x = ((val_c * val_e) - (val_b * val_f)) / ((val_a * val_e) - (val_b * val_d))
 const y = ((val_a * val_f) - (val_c * val_d)) / ((val_a * val_e) - (val_b * val_d))
 
-const c = (a * x) + (b * y)
-const f = (a * x) + (b * y)
+const c = (val_a * x) + (val_b * y)
+const f = (val_b * x) + (val_b * y)
 
 console.log(`Valor de X: ${x}\nValor de Y: ${y}\nValor de C: ${c}\nValor de F: ${f}`)
