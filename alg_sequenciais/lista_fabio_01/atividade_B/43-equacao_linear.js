@@ -19,8 +19,8 @@ const val_e  = Number(input('E: '))
 const val_f  = Number(input('F: '))
 
 
-const x = ((val_c * val_e) - (val_b * f)) / ((val_a * val_e) - (val_b * val_d))
-const y = ((val_a * f) - (val_c * val_d)) / ((val_a * e) - (val_b * val_d))
+const x = ((val_c * val_e) - (val_b * val_f)) / ((val_a * val_e) - (val_b * val_d))
+const y = ((val_a * val_f) - (val_c * val_d)) / ((val_a * val_e) - (val_b * val_d))
 
 const c = (a * x) + (b * y)
 const f = (a * x) + (b * y)
