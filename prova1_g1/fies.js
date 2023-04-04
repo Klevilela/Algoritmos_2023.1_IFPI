@@ -32,12 +32,8 @@ function main(){
     const valor_parcela_financiamento = calcular_valor_parcela_financiamento(valor_final, duracaoCurso, tempoEmMeses)
     const renda_minima = calcular_renda_minima(rendaFamiliar)
     
-    const inicio_e_fim_do_pagamento = calcular_inicio_e_fim_do_pagamento(anoIngresso, tempoEmMeses)
+    const inicio_e_fim_do_pagamento = calcular_inicio_e_fim_do_pagamento(anoIngresso, tempoEmMeses, semestreIngresso)
     
-    /*const informacao_fies =  imprimir_situacao(
-        parecer_emprestimo, valor_fincancimento, total_juros, valor_total,
-        valor_pago_durante_o_curso, renda_minima, inicio_e_fim_do_pagamento
-        )*/
     if (parecer_emprestimo === 'CONTRATO APROVADO !'){
         let informacao_fies
         informacao_fies = `\nSITUAÇÃO: ${parecer_emprestimo}`
@@ -90,7 +86,7 @@ const calcular_valor_antes_pos_curso = (valorNoCurso, valorPosCarencia) => valor
 const calcular_renda_minima = renda => renda / 3
 const eh_multiplo_de_6 = tempo_em_meses => tempo_em_meses % 6 === 0
 
-function calcular_inicio_e_fim_do_pagamento(ano, duracao_meses){
+function calcular_inicio_e_fim_do_pagamento(ano, duracao_meses, semestreIngresso){
     
     let anoInicioPagamento
     let semestreInicio
@@ -102,11 +98,11 @@ function calcular_inicio_e_fim_do_pagamento(ano, duracao_meses){
     anoFinalPagamento = anoInicioPagamento + Math.trunc(((duracao_meses / 12) * 4) - 1)
    
     if (eh_multiplo_de_6(duracao_meses)){
-        if ((duracao_meses + 18) % 12 === 0){
+        if (semestreIngresso === 1){
             semestreInicio = 1
             semestreFinal = 2
         }
-        if ((duracao_meses + 18) % 12 === 6){
+        if (semestreIngresso === 2){
             semestreInicio = 2
             semestreFinal = 1
             anoFinal ++
@@ -123,23 +119,3 @@ const calcular_valor_final = (valorCurso, valorPosCarencia) => valorCurso - valo
 const calcular_valor_parcela_financiamento = (valorFinal, meses) => valorFinal / (meses * 4)   
 
 main()
-/*
-function imprimir_situacao(
-    parecer, valorFincanciamento, juros,
-    valorDuranteCurso, valorDuranteCarencia,
-    total, rendaMinima, prazoPagamento
-){
-    let situacao
-    if (aprovar_contrato(parecer)){
-        situacao = `SITUAÇÃO: ${parecer}`
-        situacao += `\nVALOR A SER FINANCIADO: R$ ${valorFincanciamento}`
-        situacao += `\nVALOR TOTAL DE JUROS: R$ ${juros}`
-        situacao += `\nVALOR PAGO DURANTE O CURSO: R$ ${valorDuranteCurso}`
-        situacao += `\nVALOR PAGO DURANTE A CARÊNCIA: R$ ${valorDuranteCarencia}`
-        situacao += `\nVALOR PAGO PÓS CARÊNCIA(TOTAL): R$ ${total}`
-        situacao += `\nRENDA MÍNIMA: R$${rendaMinima}`
-        situacao += `\n${prazoPagamento}`
-    }
-    return situacao
-}
-*/
