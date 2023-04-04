@@ -40,7 +40,7 @@ function exibir_simulacao(valor, taxaConsorcio, entrada, prazo, renda){
     }
     else
     {
-        resultadoSimulacao = `\nValor das parcelas: R$ ${valorParcelas.toFixed(2)}`
+        resultadoSimulacao = `\nNovo valor das parcelas: R$ ${valorParcelas.toFixed(2)}`
         resultadoSimulacao += `\nTotal a pagar: R$ ${valorTotal.toFixed(2)}`
         resultadoSimulacao += `\nValor total da taxa de administração: R$ ${valorTaxaConsorcio.toFixed(2)}`
         resultadoSimulacao += `\nA renda de R$ ${renda.toFixed(2)} permite o resgate.`
@@ -51,27 +51,27 @@ function exibir_simulacao(valor, taxaConsorcio, entrada, prazo, renda){
 
 function exibir_simulacao_com_prazo_reduzido(valor, taxaConsorcio, entrada, prazoInicial, novoPrazo, renda){
     let resultadoSimulacao
-    
+
     const valorTaxaConsorcio = valor * (taxaConsorcio / 100) 
     const valorTotal = valor + valorTaxaConsorcio
+    const novo_periodo = prazoInicial - novoPrazo
     
     const valor_a_parcelar = valorTotal - entrada
-    const valorParcelas = valor_a_parcelar / novoPrazo
+    const valorParcelas = valor_a_parcelar / prazoInicial
     
     const rendaMinima = 0.3 * renda
-    const valor_inicial_parcela = valor_a_parcelar / prazoInicial
+    //const valor_inicial_parcela = valor_a_parcelar / prazoInicial
 
     if (valorParcelas > rendaMinima){
         resultadoSimulacao = `\nNão é possível fazer o resgate. A renda mínima para fazê-lo é de R$ ${rendaMinima.toFixed(2)}`
     }
     else
     {
-        resultadoSimulacao = `\nValor inicial das parcelas: R$ ${valor_inicial_parcela.toFixed(2)}`
-        resultadoSimulacao += `\nNovo prazo: ${novoPrazo} meses`
+        resultadoSimulacao = `\nValor das parcelas: R$ ${valorParcelas.toFixed(2)}`
+        resultadoSimulacao += `\nNovo prazo: ${novo_periodo} meses`
 
         resultadoSimulacao += `\n`
         
-        resultadoSimulacao += `\nNovo valor das parcelas: R$ ${valorParcelas.toFixed(2)}`
         resultadoSimulacao += `\nTotal a pagar: R$ ${valorTotal.toFixed(2)}`
         resultadoSimulacao += `\nValor total da taxa de administração: R$ ${valorTaxaConsorcio.toFixed(2)}`
         resultadoSimulacao += `\nA renda de R$ ${renda.toFixed(2)} permite o resgate.`
