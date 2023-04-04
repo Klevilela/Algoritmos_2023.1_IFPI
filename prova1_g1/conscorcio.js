@@ -60,7 +60,7 @@ function exibir_simulacao_com_prazo_reduzido(valor, taxaConsorcio, entrada, praz
     const valorParcelas = valor_a_parcelar / prazoInicial
     
     const rendaMinima = 0.3 * renda
-    //const valor_inicial_parcela = valor_a_parcelar / prazoInicial
+    
 
     if (valorParcelas > rendaMinima){
         resultadoSimulacao = `\nNão é possível fazer o resgate. A renda mínima para fazê-lo é de R$ ${rendaMinima.toFixed(2)}`
