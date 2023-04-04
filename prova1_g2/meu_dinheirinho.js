@@ -83,7 +83,7 @@ function calcula_valor_base_final(tempo, titulacao, valor_base_aula){
     if (tempo > 6){
         if (titulacao === 'e' || titulacao === 'E'){
             percentualTitulo = (20/100)
-            valor_final_hora = (valor_base_aula + (percentualTitulo * valor_base_aula)) + (valor_base_aula * 0.05) 
+            valor_final_hora = (valor_base_aula + (percentualTitulo * valor_base_aula)) + (valor_base_aula + (0.05 * tempo)) 
         }
         if (titulacao === 'm' || titulacao === 'M'){
             percentualTitulo = (30/100)
@@ -101,7 +101,10 @@ const calcular_salario_semanal = (valor_final_horas) => valor_final_horas * 7
 const calcular_salario_base_mensal = (valorSemanal) => 4.5 * valorSemanal
 
 const calcular_auxilio_creche = (filhos) => 700 * filhos
-const calcular_plano_saude = (valor_plano) => valor_plano / 2
+const calcular_plano_saude = (valor_plano) => {
+    let valor
+    valor_plano > 1000 ? valor = 500 : valor = valor_plano * (50/100) 
+}
 const calcular_auxilio_combustivel = (horas_aula) => Math.trunc(horas_aula/ 8) * 30
 const calcular_salario_bruto = (salarioBase, creche, planoSaude, combustivel) => salarioBase + creche + combustivel + planoSaude
 
@@ -126,7 +129,7 @@ function calcular_valor_previdencia(salarioBruto){
 
 function calcular_imposto_renda(salarioBase){
     let valor_ir
-    salarioBase <= 5000 ? valor_ir = 'isento' : valor_ir = 0.27 * salarioBase
+    salarioBase <= 5000 ? valor_ir = 'isento' : valor_ir = 0.27 * (salarioBase - 5000)
     return valor_ir
 }
 
