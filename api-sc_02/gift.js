@@ -21,51 +21,71 @@ function main(){
     let compras = 0
     let faturamento = 0
     let valor_acumulado_cashback = 0
+    let maior_valor_cashback = 0
+    let menor_valor_cashback = Infinity
+
 
     while (compras < qtd_compras){
         compras ++
+        print('\n')
         valor_compra = pedir_numero('Valor de compra: ')
         nome = pedir_texto('Nome: ')
 
-        if (valor_compra > 250 && valor_compra <= 500){
-            calcular_cashback(valor_compra)
-            valor_acumulado_cashback += calcular_cashback(valor_compra)
-
+        let cashback_atual = calcular_cashback(valor_compra)        
+        
+        if (cashback_atual > maior_valor_cashback){
+            maior_valor_cashback = cashback_atual
         }
-        else if (valor_compra > 250 && valor_compra <= 500){
-            calcular_cashback(valor_compra)
-            valor_acumulado_cashback += calcular_cashback(valor_compra)
+        if (cashback_atual < menor_valor_cashback){
+            menor_valor_cashback = cashback_atual
         }
-        else if (valor_compra > 250 && valor_compra <= 500){
-            calcular_cashback(valor_compra)
-            valor_acumulado_cashback += calcular_cashback(valor_compra)
-        }
-
-        valor_acumulado_cashback += calcular_cashback(valor_compra)
+        
+        valor_acumulado_cashback += cashback_atual
         faturamento += valor_compra
+
     }
 
-    const valor_distribuido_cashback = valor_compra - valor_acumulado_cashback) * 100
+    const valor_distribuido_cashback = valor_acumulado_cashback
+    const percentual_investido = (valor_distribuido_cashback / faturamento) * 100
+    const valor_medio_pago_cashback = valor_acumulado_cashback / faturamento
 
-    print(`Faturamento: R$ ${faturamento}`)
+    print(`\nFaturamento: R$ ${faturamento}`)
     print(`Valor distribuido em cashback: R$ ${valor_distribuido_cashback}`)
-    print(`Valor `)
-
+    print(`Percentual investido em cashback pela loja: ${percentual_investido.toFixed(2)} %`)
+    print(`Menor valor pago em cashback: R$ ${menor_valor_cashback}`)
+    print(`Maior valor pago em cashback: R$ ${maior_valor_cashback}`)
+    print(`Valor médio pago em cashback: R$ ${valor_medio_pago_cashback}`)
 }
 
-function calcular_cashback(valor){
+
+function eh_maior(valor){
+    if (valor > maior_valor_cashback_atual){
+        return valor
+    }
+    else{
+        menor_valor_cashback = valor
+        return valor
+    }
+}
+
+
+function calcular_cashback(valor, maior){
     let cashback
 
-    if (valor > 250 && valor <= 500){
-        cashback = valor * .7
+    if (valor > 0 && valor <= 250){
+        cashback = (5/100) * valor
+    }
+
+    else if (valor > 250 && valor <= 500){
+        cashback = valor * (7/100)
     }
     else if (valor <= 750){
-        cashback = valor * .8
+        cashback = valor * (8/100)
     }
     else{
         //E para compras acima de R$ 750 é aplicado primeiramente as regras anteriores até R$ 750 do valor em cada faixa,
         //e 25% sobre o valor acima de R$ 750.
-        cashback = (valor * .7) + (valor * .8) + .25 * (valor - 750) 
+        cashback = (valor * (7/100)) + (valor * (8/100)) + (.25 * (valor - 750)) 
     }
 
     return cashback

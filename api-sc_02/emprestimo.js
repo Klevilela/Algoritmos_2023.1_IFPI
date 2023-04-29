@@ -38,6 +38,17 @@ renda mensal suporta a parcela)
 
 import { pedir_numero, print } from "../utils.js";
 
+import { 
+    converter_meses_para_dias,
+    calcular_iof,
+    calcular_selic,
+    calcular_taxa_juros,
+    calcular_valor_total,
+    calcular_valor_parcela,
+    calcular_comprometimento_renda_mensal,
+    aprovar_emprestimo 
+} from "./utils/emprestimo_utils.js";
+
 function main(){
     const renda = pedir_numero('Renda: ')
     const valor_emprestimo = pedir_numero('Valor do empréstimo: ')
@@ -47,88 +58,26 @@ function main(){
     const dias = converter_meses_para_dias(prazo)
     const iof = calcular_iof(valor_emprestimo, prazo)
     const selic = calcular_selic(dias)
-    const juros_a_pagar = calcular_taxa_juros(valor_emprestimo, iof, selic)
+    const juros_a_pagar = calcular_taxa_juros(valor_emprestimo, selic, iof)
     const valor_total = calcular_valor_total(valor_emprestimo, juros_a_pagar)
     const valor_parcela = calcular_valor_parcela(valor_total, prazo)
     const porcentagem_comprometimento = calcular_comprometimento_renda_mensal(valor_parcela, renda)
     const resultado = aprovar_emprestimo(valor_parcela, renda)
-
-    print(`Valor pedido: R$ ${valor_emprestimo}`)
-    print(`Valor IOF: R$ ${iof}`)
-    print(`Total de juros a pagar: R$ ${juros_a_pagar}`)
-    print(`Valor total a pagar: R$ ${valor_total}`)
-    print(`Valor da parcela mensal: ${prazo}x de R$ ${valor_parcela}`)
-    print(`Compromentimenro da renda: ${porcentagem_comprometimento.toFixed(2)}% da renda`)
-    print(`${resultado}`)
-
-}
-
-
-// função para calcular valor da parcela
-function calcular_valor_parcela(total, tempo, renda){
-    const valor_parcela = valor / tempo
-
-    if (valor_parcela >= 0 && valor_parcela <= (.4 * renda)){
-        return valor_parcela
+    //const parcelamento = aprova_parcela(prazo)
+    // if (valor_parcela < (0.5 * valor_parcela))
+    if (prazo >= 2 && prazo < 25){
+        print(`\nValor pedido: R$ ${valor_emprestimo}`)
+        print(`Valor IOF: R$ ${iof.toFixed(2)}`)
+        print(`Total de juros a pagar: R$ ${juros_a_pagar.toFixed(2)}`)
+        print(`Valor total a pagar: R$ ${valor_total.toFixed(2)}`)
+        print(`Valor da parcela mensal: ${prazo}x de R$ ${valor_parcela}`)
+        print(`Compromentimenro da renda: ${porcentagem_comprometimento.toFixed(2)}% da renda`)
+        print(`${resultado}`)
     }
     else{
-        return 'Parcela acima de 40% da renda'
+        print('A parcela deve ser paga em no mínimo 2x ou prazo inferior ou igual a 24x e com valor acima de 40% da renda')
     }
 }
 
-
-// função para aprovar empréstimo
-function aprovar_emprestimo(parcela, renda){
-    parcela < renda ? 'APROVADO' : 'NEGADO'
-}
-
-// função para calcular IOF
-function calcular_iof(valor, dias){
-    const iof = ((0.38/100) * valor) + ((0.0082/100) * dias)
-    
-    return iof
-}
-
-
-//função para calcular juros usando a o prazo em função da selic
-function calcular_selic(prazo){
-    const selic = (13.75/100)
-    let valor
-
-    if (prazo > 2 && prazo <= 6){
-        valor = 0.5 * selic
-    }
-    else if(prazo <= 12){
-        valor = 0.75 * selic
-    }
-    else if(prazo <= 18){
-        valor = selic
-    }
-    else{
-        valor = selic * 1.3
-    }
-
-    return valor
-}
-
-//função para calcular a taxa de  juros
-function calcular_taxa_juros(valor, iof, selic){
-    return selic * (valor + iof) 
-}
-
-// função para calcular o valor total do financiamento
-function calcular_valor_total(valor, juros){
-    return valor + juros
-}
-
-//função para converter o prazo em dias
-function converter_meses_para_dias(meses){
-    return meses * 30
-}
-
-// função para saber quanto % o valor da parcela compromete a renda mensal
-function calcular_comprometimento_renda_mensal(parcela, renda){
-    return (parcela * 100) / renda 
-}
 
 main()
