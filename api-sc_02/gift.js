@@ -1,5 +1,5 @@
 import {pedir_numero, pedir_texto, print} from '../utils.js'
-
+import { calcular_cashback, calcular_percentual_investido, calcular_valor_medio } from './utils/gift_utils.js'
 /*
 
 [gift.js] Uma loja presenteia suas clientes com descontos (cashback) progressivos de acordo com suas compras.
@@ -46,49 +46,16 @@ function main(){
     }
 
     const valor_distribuido_cashback = valor_acumulado_cashback
-    const percentual_investido = (valor_distribuido_cashback / faturamento) * 100
-    const valor_medio_pago_cashback = valor_acumulado_cashback / faturamento
+    const percentual_investido = calcular_percentual_investido(valor_acumulado_cashback, faturamento)
+    const valor_medio_pago_cashback = calcular_valor_medio(valor_acumulado_cashback, qtd_compras)
 
     print(`\nFaturamento: R$ ${faturamento}`)
     print(`Valor distribuido em cashback: R$ ${valor_distribuido_cashback}`)
     print(`Percentual investido em cashback pela loja: ${percentual_investido.toFixed(2)} %`)
     print(`Menor valor pago em cashback: R$ ${menor_valor_cashback}`)
     print(`Maior valor pago em cashback: R$ ${maior_valor_cashback}`)
-    print(`Valor médio pago em cashback: R$ ${valor_medio_pago_cashback}`)
+    print(`Valor médio pago em cashback: R$ ${valor_medio_pago_cashback.toFixed(2)}`)
 }
 
-
-function eh_maior(valor){
-    if (valor > maior_valor_cashback_atual){
-        return valor
-    }
-    else{
-        menor_valor_cashback = valor
-        return valor
-    }
-}
-
-
-function calcular_cashback(valor, maior){
-    let cashback
-
-    if (valor > 0 && valor <= 250){
-        cashback = (5/100) * valor
-    }
-
-    else if (valor > 250 && valor <= 500){
-        cashback = valor * (7/100)
-    }
-    else if (valor <= 750){
-        cashback = valor * (8/100)
-    }
-    else{
-        //E para compras acima de R$ 750 é aplicado primeiramente as regras anteriores até R$ 750 do valor em cada faixa,
-        //e 25% sobre o valor acima de R$ 750.
-        cashback = (valor * (7/100)) + (valor * (8/100)) + (.25 * (valor - 750)) 
-    }
-
-    return cashback
-}
 
 main()
