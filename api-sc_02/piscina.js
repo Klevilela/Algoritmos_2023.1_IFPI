@@ -41,24 +41,5 @@ function main(){
     print(`Valor mensal para repor a água da piscina: R$ ${valor_mensal}`)
 }
 
-function calcular_capacidade(l, c, h){
-    return l * c * h
-}
-
-function calcular_capacidade_ideal(capacidade){
-    return .85 * capacidade
-}
-
-function calcular_valor(capacidadeLitros, valor){
-    return capacidadeLitros * valor
-}
-
-function calcular_gasto_mensal(valor_total){
-    return 0.1 * valor_total
-}
-
-function converter_cm3_para_l(capacidade){
-    return capacidade / 1000 
-}
 
 main()
