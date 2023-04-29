@@ -52,8 +52,8 @@ function main(){
     print(`\nFaturamento: R$ ${faturamento}`)
     print(`Valor distribuido em cashback: R$ ${valor_distribuido_cashback}`)
     print(`Percentual investido em cashback pela loja: ${percentual_investido.toFixed(2)} %`)
-    print(`Menor valor pago em cashback: R$ ${menor_valor_cashback}`)
-    print(`Maior valor pago em cashback: R$ ${maior_valor_cashback}`)
+    print(`Menor valor pago em cashback: R$ ${menor_valor_cashback.toFixed(2)}`)
+    print(`Maior valor pago em cashback: R$ ${maior_valor_cashback.toFixed(2)}`)
     print(`Valor médio pago em cashback: R$ ${valor_medio_pago_cashback.toFixed(2)}`)
 }
 
