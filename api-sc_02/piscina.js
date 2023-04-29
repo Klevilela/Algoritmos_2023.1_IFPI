@@ -23,6 +23,13 @@ a piscina no nível ideal.
  */
 
 import { pedir_numero, print } from "../utils.js";
+import { 
+    calcular_capacidade,
+    calcular_capacidade_ideal,
+    converter_cm3_para_l,
+    calcular_valor,
+    calcular_gasto_mensal
+} from './utils/piscina_utils.js'
 
 function main(){
     const largura = pedir_numero('Largura(cm): ')
