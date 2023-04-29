@@ -42,7 +42,6 @@ function main(){
         
         valor_acumulado_cashback += cashback_atual
         faturamento += valor_compra
-
     }
 
     const valor_distribuido_cashback = valor_acumulado_cashback
