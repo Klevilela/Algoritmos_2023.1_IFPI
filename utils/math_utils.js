@@ -3,6 +3,9 @@ export const eh_impar = (valor) => valor % 2 !== 0
 export const raiz_quadrada = (valor) => Math.sqrt(valor)
 export const raiz_cubica = (valor) => Math.cbrt(valor)
 export const raiz = (numero, indice) => numero ** (1/indice)
+export const eh_positivo = valor => valor > 0
+export const eh_negativo = valor => !eh_positivo(valor)
+
 
 export const divisores = (numero) => {
     let candidato = 1
@@ -104,11 +107,32 @@ export function eh_numero_perfeito(numero){
 
 }
 
+/*export function eh_divisivel(valor, candidato){
+    if (valor % candidato === 0){
+        return candidato
+    }
+}*/
+
+export function gerar_numero_aleatorio(minimo=0, maximo){
+    const valor = Math.random() * (maximo - minimo) + minimo
+    return Math.trunc(valor)
+}
+
+export function eh_multiplo(multiplo, numero){
+    for (let i = 0; i < multiplo; i++){
+        if (numero * i === multiplo){
+            return true
+        }
+    }
+}
+
+//console.log(gerar_numero_aleatorio(4, 100))
 
 //console.log(divisores(18))
 //console.log(mmc(4,8))
-//console.log(eh_primo(2))
+//console.log(eh_primo(43))
 //console.log(raiz_cubica(27))
 
-console.log(eh_numero_perfeito(6))
+//console.log(eh_numero_perfeito(6))
 
+console.log(eh_multiplo(27, 3))
