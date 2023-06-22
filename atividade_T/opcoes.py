@@ -8,7 +8,6 @@ def executar_opcao(opcao):
         if opcao == 1:
             nomes = listar_pessoas()
             print(nomes)
-            #print(obter_lista_pessoas())
         if opcao == 2:
             valor_rifa = float(input('\nInforme o valor do ponto da rifa: '))
         if opcao == 3:
@@ -32,7 +31,5 @@ def executar_opcao(opcao):
         
         print('\n')
         print(exibir_menu)
-        opcao = int(input('\nopcao: '))
-    #if opcao == 4:
-        #calcular_total_arrecadado(valor_rifa, taxa_administracao)
-    #if opcao == 5:
+        opcao = int(input('\nInforme a opção: '))
+    
